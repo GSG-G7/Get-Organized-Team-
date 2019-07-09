@@ -14,6 +14,7 @@ var todoArray = [
   }
 ];
 
+
 var todoFunctions = {
   // todoFunctions.generateId() will give you a unique id
   // You do not need to understand the implementation of this function.
@@ -40,6 +41,15 @@ var todoFunctions = {
     // returns a new array, it should contain todos with the newTodo added to the end.
     // add an id to the newTodo. You can use the generateId function to create an id.
     // hint: array.concat
+    let newArray = todoFunctions.cloneArrayOfObjects(todos)
+    if(newTodo === "" || !isNaN(newTodo)) return false;
+    let item = {
+      id: todoFunctions.generateId(),
+      description: newTodo,
+      done: false
+    };
+    newArray.push(item);
+    return newArray;
   },
   deleteTodo: function(todos, idToDelete) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
@@ -76,6 +86,12 @@ var todoFunctions = {
     // should leave the input arguement todos unchanged (you can use cloneArrayOfObjects)
     // sortFunction will have same signature as the sort function in array.sort
     // hint: array.slice, array.sort
+    let newarr = todoFunctions.cloneArrayOfObjects(todos);
+    let notdone = newarr.filter(element => element.done);
+    let done = newarr.filter(element=> !element.done)
+    notdone.concat(done).sort()
+    
+
   }
 };
 
