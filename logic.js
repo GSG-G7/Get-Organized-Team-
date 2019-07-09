@@ -1,20 +1,6 @@
 // Part 1. Fill in any missing parts of the todoFunction object!
 // you can access these on todo.todoFunctions
 // For part one we expect you to use tdd
-var todoArray = [
-  {
-      id: 0,
-      description: 'Clean room',
-      done: false
-  },
-  {
-      id: 1,
-      description: 'Play games',
-      done: false
-  }
-
-]
-
 
 var todoFunctions = {
   // todoFunctions.generateId() will give you a unique id
@@ -42,8 +28,8 @@ var todoFunctions = {
     // returns a new array, it should contain todos with the newTodo added to the end.
     // add an id to the newTodo. You can use the generateId function to create an id.
     // hint: array.concat
-    let newArray = todoFunctions.cloneArrayOfObjects(todos)
-    if(newTodo === "" || !isNaN(newTodo)) return false;
+    let newArray = todoFunctions.cloneArrayOfObjects(todos);
+    if (newTodo === "" || !isNaN(newTodo)) return false;
     let item = {
       id: todoFunctions.generateId(),
       description: newTodo,
@@ -56,18 +42,30 @@ var todoFunctions = {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
     let newArray = todoFunctions.cloneArrayOfObjects(todos);
     // return a new array, this should not contain any todo with an id of idToDelete
-    newArray.filter((element,index,array) => {
-      if(element.id === idToDelete){
-        array.splice(index,1);
+    newArray.filter((element, index, array) => {
+      if (element.id === idToDelete) {
+        array.splice(index, 1);
       }
     });
-    // hint: array.filter  
-    return newArray     
+    // hint: array.filter
+    return newArray;
   },
   markTodo: function(todos, idToMark) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
+    let newArray = todoFunctions.cloneArrayOfObjects(todos);
     // in the new todo array, all elements will remain unchanged except the one with id: idToMark
+    newArray.map(element => {
+      if (element.id === idToMark) {
+        if (!element.done) {
+          element.done = true;
+        } else {
+          element.done = false;
+        }
+      }
+    });
     // this element will have its done value toggled
+
+    return newArray;
     // hint: array.map
   },
   sortTodos: function(todos, sortFunction) {
@@ -76,18 +74,16 @@ var todoFunctions = {
     // sortFunction will have same signature as the sort function in array.sort
     // hint: array.slice, array.sort
    let newArr = todoFunctions.cloneArrayOfObjects(todos);
-   let done = newArr.filter(element => element.done);
+   let doneState = newArr.filter(element => element.done);
    let notDone = newArr.filter(element=> !element.done);
    function sortItems(a,b) {
      return a.description > b.description ? 1 : -1;
    }
    notDone.sort(sortItems);
-   done.sort(sortItems);
-   return notDone.concat(done);
+   doneState.sort(sortItems);
+   return notDone.concat(doneState);
   }
 };
-
-
 
 // Why is this if statement necessary?
 // The answer has something to do with needing to run code both in the browser and in Node.js
@@ -96,4 +92,3 @@ var todoFunctions = {
 if (typeof module !== "undefined") {
   module.exports = todoFunctions;
 }
-
