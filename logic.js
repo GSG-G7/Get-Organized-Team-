@@ -3,17 +3,16 @@
 // For part one we expect you to use tdd
 var todoArray = [
   {
-      id: 0,
-      description: 'Clean room',
-      done: false
+    id: 0,
+    description: "Clean room",
+    done: false
   },
   {
-      id: 1,
-      description: 'Play games',
-      done: false
+    id: 1,
+    description: "Play games",
+    done: false
   }
-
-]
+];
 
 var todoFunctions = {
   // todoFunctions.generateId() will give you a unique id
@@ -46,18 +45,30 @@ var todoFunctions = {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
     let newArray = todoFunctions.cloneArrayOfObjects(todos);
     // return a new array, this should not contain any todo with an id of idToDelete
-    newArray.filter((element,index,array) => {
-      if(element.id === idToDelete){
-        array.splice(index,1);
+    newArray.filter((element, index, array) => {
+      if (element.id === idToDelete) {
+        array.splice(index, 1);
       }
     });
-    // hint: array.filter  
-    return newArray     
+    // hint: array.filter
+    return newArray;
   },
   markTodo: function(todos, idToMark) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
+    let newArray = todoFunctions.cloneArrayOfObjects(todos);
     // in the new todo array, all elements will remain unchanged except the one with id: idToMark
+    newArray.map(element => {
+      if (element.id === idToMark) {
+        if (!element.done) {
+          element.done = true;
+        } else {
+          element.done = false;
+        }
+      }
+    });
     // this element will have its done value toggled
+
+    return newArray;
     // hint: array.map
   },
   sortTodos: function(todos, sortFunction) {
@@ -68,8 +79,6 @@ var todoFunctions = {
   }
 };
 
-
-
 // Why is this if statement necessary?
 // The answer has something to do with needing to run code both in the browser and in Node.js
 // See this article for more details:
@@ -77,4 +86,3 @@ var todoFunctions = {
 if (typeof module !== "undefined") {
   module.exports = todoFunctions;
 }
-
