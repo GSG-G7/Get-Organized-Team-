@@ -75,12 +75,15 @@ var todoFunctions = {
     // should leave the input arguement todos unchanged (you can use cloneArrayOfObjects)
     // sortFunction will have same signature as the sort function in array.sort
     // hint: array.slice, array.sort
-    let newarr = todoFunctions.cloneArrayOfObjects(todos);
-    let notdone = newarr.filter(element => element.done);
-    let done = newarr.filter(element=> !element.done)
-    notdone.concat(done).sort()
-    
-
+   let newArr = todoFunctions.cloneArrayOfObjects(todos);
+   let done = newArr.filter(element => element.done);
+   let notDone = newArr.filter(element=> !element.done);
+   function sortItems(a,b) {
+     return a.description > b.description ? 1 : -1;
+   }
+   notDone.sort(sortItems);
+   done.sort(sortItems);
+   return notDone.concat(done);
   }
 };
 
