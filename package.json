@@ -1,0 +1,26 @@
+{
+  "name": "Get-Organized-Team-",
+  "version": "1.0.0",
+  "description": "A todo list app done by Yosef A, Alaa Y, Rana S and Fadi O",
+  "main": "dom.js",
+  "scripts": {
+    "test": "node ./test.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G7/Get-Organized-Team-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G7/Get-Organized-Team-/issues"
+  },
+  "homepage": "https://github.com/GSG-G7/Get-Organized-Team-#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "nyc": "^14.1.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.11.0"
+  }
+}
