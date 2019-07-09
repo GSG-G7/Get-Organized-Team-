@@ -1,6 +1,19 @@
 // Part 1. Fill in any missing parts of the todoFunction object!
 // you can access these on todo.todoFunctions
 // For part one we expect you to use tdd
+var todoArray = [
+  {
+      id: 0,
+      description: 'Clean room',
+      done: false
+  },
+  {
+      id: 1,
+      description: 'Play games',
+      done: false
+  }
+
+]
 
 var todoFunctions = {
   // todoFunctions.generateId() will give you a unique id
@@ -40,8 +53,15 @@ var todoFunctions = {
   },
   deleteTodo: function(todos, idToDelete) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
+    let newArray = todoFunctions.cloneArrayOfObjects(todos);
     // return a new array, this should not contain any todo with an id of idToDelete
-    // hint: array.filter
+    newArray.filter((element,index,array) => {
+      if(element.id === idToDelete){
+        array.splice(index,1);
+      }
+    });
+    // hint: array.filter  
+    return newArray     
   },
   markTodo: function(todos, idToMark) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
@@ -63,6 +83,8 @@ var todoFunctions = {
   }
 };
 
+
+
 // Why is this if statement necessary?
 // The answer has something to do with needing to run code both in the browser and in Node.js
 // See this article for more details:
@@ -70,3 +92,4 @@ var todoFunctions = {
 if (typeof module !== "undefined") {
   module.exports = todoFunctions;
 }
+
