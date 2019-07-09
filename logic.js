@@ -79,7 +79,7 @@ var todoFunctions = {
    function sortItems(a,b) {
      return a.description > b.description ? 1 : -1;
    }
-   notDone.sort(sortItems);
+   notDone.sort(sortItems); 
    doneState.sort(sortItems);
    return notDone.concat(doneState);
   }
