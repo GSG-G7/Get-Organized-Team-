@@ -34,6 +34,13 @@ test("Test Delete Function", function(t) {
   t.end();
 });
 
+test("Test addTodo function", function(todo) {
+  let actual = logic.addTodo(sample, "");
+  let expected = false;
+  todo.deepEqual(actual, expected, "add numbers in the description value");
+  todo.end();
+});
+
 test("Test Marked Function", function(t) {
   var obj = [
     { id: 0, description: "Rana", done: false },
