@@ -1,18 +1,6 @@
 // Part 1. Fill in any missing parts of the todoFunction object!
 // you can access these on todo.todoFunctions
 // For part one we expect you to use tdd
-var todoArray = [
-  {
-    id: 0,
-    description: "Clean room",
-    done: false
-  },
-  {
-    id: 1,
-    description: "Play games",
-    done: false
-  }
-];
 
 var todoFunctions = {
   // todoFunctions.generateId() will give you a unique id
