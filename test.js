@@ -17,7 +17,7 @@ test("Test addTodo function", function(todo) {
 
 test("Test addTodo function", function(todo) {
   let actual = logic.addTodo(sample, "");
-  let expected = false;
+  let expected = [ { id: 2, description: '', done: false } ];
   todo.deepEqual(actual, expected, "add empty description");
   todo.end();
 });
@@ -25,9 +25,9 @@ test("Test addTodo function", function(todo) {
 // a test to make sure that the input isn't a number
 
 test("Test addTodo function", function(todo) {
-  let actual = logic.addTodo(sample, 1);
+  let actual = logic.addTodo(sample, 1)[0].done;
   let expected = false;
-  todo.deepEqual(actual, expected, "add numbers in the description value");
+  todo.deepEqual(actual, expected, "should return false");
   todo.end();
 });
 
@@ -120,8 +120,8 @@ test('Testing Sort Function', function(t){
     { id: 2, description: 'do my homework', done: false}
   ];
   var expected = [
-    { id: 1, description: 'do my homework', done: false},
-    { id: 2, description: 'do my homework', done: false}
+    { id: 2, description: 'do my homework', done: false},
+    { id: 1, description: 'do my homework', done: false}
   ];
   const actual = logic.sortTodos(unSorted);
   t.deepEqual(actual, expected, 'if tasks have the same alphabetical order');
