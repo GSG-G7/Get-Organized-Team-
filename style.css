@@ -13,29 +13,42 @@ linear-gradient(141.28deg, #93F191 35.78%, rgba(73, 220, 174, 0.442984) 109%, rg
 
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
   display: flex;
   flex-direction: column;
 }
 
 .header {
   order: 1;
-  height: 90px;
-  padding: 20px 30px;
+  height: 13vh;
+  padding: 60px 80px;
   color: #fff;
-  font-size: 19px;
+  font-size: 3rem;
   font-weight: 500;
   display: flex;
   width: 100%;
   justify-content: space-between;
   background: linear-gradient(
     141.28deg,
-    #93f191 35.78%,
-    rgba(73, 220, 174, 0.442984) 109%,
-    rgba(38, 249, 156, 0.140125) 123.57%,
+    #80ec7e 35.78%,
+    rgba(48, 179, 137, 0.443) 109%,
+    rgba(27, 202, 126, 0.14) 123.57%,
     rgba(97, 227, 203, 0.635966) 134.09%,
     rgba(22, 255, 143, 0) 134.1%
   );
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.18);
+}
+
+.header button {
+  margin: 0 5px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.header button i {
+  color: #fff;
 }
 
 #add-todo {
@@ -48,18 +61,25 @@ body {
 
 #add-todo input[type="text"] {
   width: 90%;
+  height: 6vh;
   border: none;
-  border-bottom: 1px solid rgb(110, 110, 110);
+  border-bottom: 1px solid rgb(187, 187, 187);
   padding: 5px 20px 5px 5px;
-  font-size: 18px;
+  font-size: 3rem;
   outline: none;
+  transition: all 0.2s ease-in;
+}
+
+#add-todo input[type="text"]:focus {
+  border-bottom: 1px solid rgb(104, 104, 104);
 }
 
 #add-todo input[type="submit"] {
-  margin: 0 2px;
-  font-size: 20px;
+  margin: 12px 0 0 2px;
+  height: 5vh;
+  font-size: 3rem;
   font-weight: 700;
-  padding: 10px 16px;
+  padding: 0px 40px;
   color: #fff;
   border-radius: 50%;
   border: none;
@@ -67,6 +87,11 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   outline: none;
   cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+#add-todo input[type="submit"]:hover {
+  background-color: #19db7d;
 }
 
 #todo-container {
@@ -78,11 +103,12 @@ ul {
   width: 90%;
   margin: 0 auto;
   list-style-type: none;
-  font-size: 19px;
+  font-family: "Lato", sans-serif;
 }
 
 li {
   width: 100%;
+  height: 8vh;
   margin: 15px 0;
   padding: 15px 20px;
   border: 1px solid rgba(177, 177, 177, 0.8);
@@ -91,24 +117,100 @@ li {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
+
+  font-size: 3rem;
+}
+
+#completed {
+  width: 100%;
+  margin: 15px 0;
+  padding: 0px 50px;
+  border: 1px solid rgba(177, 177, 177, 0.8);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.959);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
   overflow: hidden;
+  text-decoration: line-through;
 }
 
 li span {
   flex: 2;
+  align-self: center;
+  overflow: hidden;
 }
 
 li button {
-  margin: 0 5px;
+  margin: 0 10px;
   border: none;
   outline: none;
   background: transparent;
   cursor: pointer;
-  font-size: 19px;
+  font-size: 16px;
 }
 
 .marked {
+  border: 2px solid #4bec9f;
+  color: #4bec9f;
+  padding: 5px 5px;
+  border-radius: 50%;
+  font-size: 3rem;
+  transition: all 0.2s ease-in;
+}
+
+.marked:hover {
   background-color: #4bec9f;
-  border-radius: 11px;
   color: #fff;
+}
+
+.delete {
+  color: rgb(148, 148, 148);
+  font-size: 3rem;
+  transition: all 0.2s ease-in;
+}
+
+.delete:hover {
+  color: rgb(240, 72, 72);
+}
+
+.checked {
+  color: rgb(126, 126, 126);
+  text-decoration: line-through;
+}
+
+.high-lighted {
+  background-color: #4bec9f;
+  color: #fff;
+}
+
+@media (min-width: 600px) {
+  .header {
+    height: 10px;
+    font-size: 2rem;
+  }
+  .header button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    width: 10px;
+  }
+  #add-todo input[type="submit"] {
+    font-size: 2rem;
+    padding: 10px 20px;
+    height: auto;
+  }
+  #add-todo input[type="text"] {
+    font-size: 2rem;
+  }
+
+  li {
+    font-size: 1.5rem;
+    height: 70px;
+  }
+  .marked {
+    font-size: 1.5rem;
+  }
+  .delete {
+    font-size: 2rem;
+  }
 }

@@ -1,8 +1,11 @@
 // part 2 linking it all together
 // The function here is called an iife,
 // it keeps everything inside hidden from the rest of our application
+
 (function() {
   // This is the dom node where we will keep our todo
+  var completed = document.querySelector("#completed");
+  console.log(completed);
   var container = document.getElementById("todo-container");
   var addTodoForm = document.getElementById("add-todo");
 
@@ -31,8 +34,17 @@
   thebody.insertBefore(headerPart, container);
   //////////////////////////////
 
-  //////////// add sort function  ///////////
-  //////////// add sort function  ///////////
+  // add sort button
+  var sortTasksButton = document.createElement("button");
+  sortTasksButton.classList.add = "sort-button";
+  var symbol = document.createElement("i");
+  symbol.className = "fas fa-sort";
+  sortTasksButton.appendChild(symbol);
+  numTasks.appendChild(sortTasksButton);
+  sortTasksButton.addEventListener("click", function(event) {
+    let sortState = todoFunctions.sortTodos(state);
+    update(sortState);
+  });
 
   // This function takes a todo, it returns the DOM node representing that todo
   var createTodoNode = function(todo) {
@@ -61,19 +73,24 @@
     // add markTodo button
     var markedTodoButton = document.createElement("button");
     var symbol = document.createElement("i");
-    symbol.className = "far fa-check-circle";
-    // add classes for css
+    symbol.className = "fas fa-check";
     symbol.classList.add("marked");
     markedTodoButton.appendChild(symbol);
+    todoNode.appendChild(markedTodoButton);
+    // Check if it's done or no and if it is give it a class
+    if (todo.done) {
+      todoNode.classList.toggle("checked");
+      symbol.classList.add("high-lighted");
+    }
+    // add classes for css
     markedTodoButton.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
     });
-    todoNode.appendChild(markedTodoButton);
 
     return todoNode;
   };
-  // bind create todo form
+
   if (addTodoForm) {
     addTodoForm.addEventListener("submit", function(event) {
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
@@ -81,11 +98,12 @@
       let todoContext = document.getElementsByName("description")[0].value;
       console.log(todoContext);
       // validation for user -- can not enter spcial char
-      if (todoContext !== "") {
+      if (todoContext != "") {
         let newItem = todoFunctions.addTodo(state, todoContext);
-        update(newItem);
         document.getElementsByName("description")[0].value = "";
+        update(newItem);
       }
+
       // what does event.preventDefault do?
       // what is inside event.target?
 
