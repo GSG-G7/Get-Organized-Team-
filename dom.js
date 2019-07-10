@@ -12,11 +12,7 @@
     { id: -1, description: "third todo" }
   ]; // this is our initial todoList
 
-
-
-  //////////// add sort function  /////////// 
-
-
+  //////////// add sort function  ///////////
 
   // This function takes a todo, it returns the DOM node representing that todo
   var createTodoNode = function(todo) {
@@ -24,10 +20,10 @@
     // you will need to use addEventListener
 
     // add span holding description
-    let todoElement = document.createElement('span');
-        todoElement.textContent = todo.description;
-        todoElement.setAttribute('id',todo.id);
-        todoNode.appendChild(todoElement);
+    let todoElement = document.createElement("span");
+    todoElement.textContent = todo.description;
+    todoElement.setAttribute("id", todo.id);
+    todoNode.appendChild(todoElement);
 
     // this adds the delete button
     var deleteButtonNode = document.createElement("button");
@@ -38,9 +34,15 @@
     todoNode.appendChild(deleteButtonNode);
 
     // add markTodo button
-
+    var markedTodoButton = document.createElement("button");
+    markedTodoButton.innerHTML = '<i class="far fa-check-circle"></i>';
+    markedTodoButton.addEventListener("click", function(event) {
+      var newState = todoFunctions.markTodo(state, todo.id);
+      update(newState);
+    });
+    todoNode.appendChild(markedTodoButton);
     // add classes for css
-    console.log(state)
+    console.log(state);
 
     return todoNode;
   };
@@ -49,10 +51,10 @@
     addTodoForm.addEventListener("submit", function(event) {
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
-      let todoContext = document.getElementsByName('description')[0].value;
-      let newItem = todoFunctions.addTodo(state,todoContext);
-      if(newItem === false ) alert('Enter a correct content');
-      document.getElementsByName('description')[0].value = '';
+      let todoContext = document.getElementsByName("description")[0].value;
+      let newItem = todoFunctions.addTodo(state, todoContext);
+      if (newItem === false) alert("Enter a correct content");
+      document.getElementsByName("description")[0].value = "";
       update(newItem);
 
       // what does event.preventDefault do?
