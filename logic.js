@@ -78,18 +78,17 @@ var todoFunctions = {
   //sortTodos Function
 
   sortTodos: function(todos, sortFunction) {
-  
-   let newArr = todoFunctions.cloneArrayOfObjects(todos);
-   let doneTasks = newArr.filter(element => element.done); // done: true
-   let unDoneTasks = newArr.filter(element=> !element.done); //done: false
+    let newArr = todoFunctions.cloneArrayOfObjects(todos);
+    let doneTasks = newArr.filter(element => element.done); // done: true
+    let unDoneTasks = newArr.filter(element => !element.done); //done: false
 
-   function sortItems(a,b) {
-     return a.description > b.description ? 1 : -1;
+    function sortItems(a, b) {
+      return a.description > b.description ? 1 : -1;
     }
-   
-   unDoneTasks.sort(sortItems); 
-   doneTasks.sort(sortItems);
-   return unDoneTasks.concat(doneTasks);
+
+    unDoneTasks.sort(sortItems);
+    doneTasks.sort(sortItems);
+    return unDoneTasks.concat(doneTasks);
   }
 };
 
