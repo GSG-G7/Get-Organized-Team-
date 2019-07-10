@@ -85,10 +85,11 @@ thebody.insertBefore(headerPart,container);
       event.preventDefault();
       let todoContext = document.getElementsByName("description")[0].value;
       // validation for user -- can not enter spcial char
-      let newItem = todoFunctions.addTodo(state, todoContext);
-      if (newItem === false) alert("Enter a correct content");
+      if(todoContext != ""){
+        let newItem = todoFunctions.addTodo(state, todoContext);
       document.getElementsByName("description")[0].value = "";
       update(newItem);
+      }
       
       // what does event.preventDefault do?
       // what is inside event.target?
