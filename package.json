@@ -1,10 +1,10 @@
 {
-  "name": "Get-Organized-Team-",
+  "name": "get-organized-team",
   "version": "1.0.0",
   "description": "A todo list app done by Yosef A, Alaa Y, Rana S and Fadi O",
   "main": "dom.js",
   "scripts": {
-    "test": "node ./test.js | tap-spec"
+    "test": "nodemon ./test.js | tap-spec"
   },
   "repository": {
     "type": "git",
