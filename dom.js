@@ -12,24 +12,24 @@
     { id: -1, description: "third todo" }
   ]; // this is our initial todoList
 
-//////////////////////////header and date section/////////////////////////////
-let thebody=document.getElementsByTagName('body')[0];
-let headerPart=document.createElement('header');
-headerPart.setAttribute('class','header');
-let datePart=document.createElement('span');
-let today =new Date();
-option ={weekday:"long",month:"short",day:"numeric"};
-datePart.innerHTML=today.toLocaleDateString('en',option);
+  //////////////////////////header and date section/////////////////////////////
+  let thebody = document.getElementsByTagName("body")[0];
+  let headerPart = document.createElement("header");
+  headerPart.setAttribute("class", "header");
+  let datePart = document.createElement("span");
+  let today = new Date();
+  option = { weekday: "long", month: "short", day: "numeric" };
+  datePart.innerHTML = today.toLocaleDateString("en", option);
 
-datePart.setAttribute('class','date');
-let numTasks=document.createElement('span');
-numTasks.textContent=state.length+" task";
-numTasks.setAttribute('class','numTasks');
+  datePart.setAttribute("class", "date");
+  let numTasks = document.createElement("span");
+  numTasks.textContent = state.length + " task";
+  numTasks.setAttribute("class", "numTasks");
 
-headerPart.appendChild(datePart);
-headerPart.appendChild(numTasks);
-thebody.insertBefore(headerPart,container);
-//////////////////////////////
+  headerPart.appendChild(datePart);
+  headerPart.appendChild(numTasks);
+  thebody.insertBefore(headerPart, container);
+  //////////////////////////////
 
   //////////// add sort function  ///////////
   //////////// add sort function  ///////////
@@ -49,6 +49,8 @@ thebody.insertBefore(headerPart,container);
     var deleteButtonNode = document.createElement("button");
     var symbol = document.createElement("i");
     symbol.className = "far fa-trash-alt";
+    // add classes for css
+    symbol.classList.add("delete");
     deleteButtonNode.appendChild(symbol);
     deleteButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.deleteTodo(state, todo.id);
@@ -57,11 +59,11 @@ thebody.insertBefore(headerPart,container);
     todoNode.appendChild(deleteButtonNode);
 
     // add markTodo button
-
-    // add classes for css
     var markedTodoButton = document.createElement("button");
     var symbol = document.createElement("i");
     symbol.className = "far fa-check-circle";
+    // add classes for css
+    symbol.classList.add("marked");
     markedTodoButton.appendChild(symbol);
     markedTodoButton.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
@@ -77,12 +79,13 @@ thebody.insertBefore(headerPart,container);
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
       let todoContext = document.getElementsByName("description")[0].value;
+      console.log(todoContext);
       // validation for user -- can not enter spcial char
-      let newItem = todoFunctions.addTodo(state, todoContext);
-      if (newItem === false) alert("Enter a correct content");
-      document.getElementsByName("description")[0].value = "";
-      update(newItem);
-      
+      if (todoContext !== "") {
+        let newItem = todoFunctions.addTodo(state, todoContext);
+        update(newItem);
+        document.getElementsByName("description")[0].value = "";
+      }
       // what does event.preventDefault do?
       // what is inside event.target?
 

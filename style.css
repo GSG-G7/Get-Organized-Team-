@@ -1,0 +1,114 @@
+/*
+font-family: 'Roboto', sans-serif;
+font-family: 'Lato', sans-serif;
+linear-gradient(141.28deg, #93F191 35.78%, rgba(73, 220, 174, 0.442984) 109%, rgba(38, 249, 156, 0.140125) 123.57%, rgba(97, 227, 203, 0.635966) 134.09%, rgba(22, 255, 143, 0) 134.1%);
+#4BEC9F
+#93F191
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  order: 1;
+  height: 90px;
+  padding: 20px 30px;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 500;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background: linear-gradient(
+    141.28deg,
+    #93f191 35.78%,
+    rgba(73, 220, 174, 0.442984) 109%,
+    rgba(38, 249, 156, 0.140125) 123.57%,
+    rgba(97, 227, 203, 0.635966) 134.09%,
+    rgba(22, 255, 143, 0) 134.1%
+  );
+}
+
+#add-todo {
+  margin: 10px auto;
+  order: 2;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#add-todo input[type="text"] {
+  width: 90%;
+  border: none;
+  border-bottom: 1px solid rgb(110, 110, 110);
+  padding: 5px 20px 5px 5px;
+  font-size: 18px;
+  outline: none;
+}
+
+#add-todo input[type="submit"] {
+  margin: 0 2px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 16px;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+  background-color: #4bec9f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  outline: none;
+  cursor: pointer;
+}
+
+#todo-container {
+  order: 3;
+  width: 100%;
+}
+
+ul {
+  width: 90%;
+  margin: 0 auto;
+  list-style-type: none;
+  font-size: 19px;
+}
+
+li {
+  width: 100%;
+  margin: 15px 0;
+  padding: 15px 20px;
+  border: 1px solid rgba(177, 177, 177, 0.8);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.959);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+li span {
+  flex: 2;
+}
+
+li button {
+  margin: 0 5px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+.marked {
+  background-color: #4bec9f;
+  border-radius: 11px;
+  color: #fff;
+}
