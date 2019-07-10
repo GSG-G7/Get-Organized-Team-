@@ -8,6 +8,7 @@
   console.log(completed);
   var container = document.getElementById("todo-container");
   var addTodoForm = document.getElementById("add-todo");
+  let inputField = document.getElementsByName("description")[0];
 
   var state = [
     { id: -3, description: "first todo" },
@@ -15,6 +16,11 @@
     { id: -1, description: "third todo" }
   ]; // this is our initial todoList
 
+  let len = state.length;
+  const localstorage = localStorage.getItem("TODO");
+  if (localstorage) {
+    len = JSON.parse(localstorage).length;
+  }
   //////////////////////////header and date section/////////////////////////////
   let thebody = document.getElementsByTagName("body")[0];
   let headerPart = document.createElement("header");
@@ -27,11 +33,13 @@
   datePart.setAttribute("class", "date");
   let numTasks = document.createElement("span");
   numTasks.textContent = state.length + " task";
+  numTasks.textContent = len + " task";
   numTasks.setAttribute("class", "numTasks");
 
   headerPart.appendChild(datePart);
   headerPart.appendChild(numTasks);
   thebody.insertBefore(headerPart, container);
+
   //////////////////////////////
 
   // add sort button
@@ -44,6 +52,12 @@
   sortTasksButton.addEventListener("click", function(event) {
     let sortState = todoFunctions.sortTodos(state);
     update(sortState);
+
+    var taskElement = document.getElementsByClassName("numTasks")[0];
+
+    taskElement.textContent = sortState.length + " task";
+
+    localStorage.setItem("TODO", JSON.stringify(state));
   });
 
   // This function takes a todo, it returns the DOM node representing that todo
@@ -67,6 +81,8 @@
     deleteButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.deleteTodo(state, todo.id);
       update(newState);
+      taskElement.textContent = newState.length + " task";
+      localStorage.setItem("TODO", JSON.stringify(state));
     });
     todoNode.appendChild(deleteButtonNode);
 
@@ -86,6 +102,9 @@
     markedTodoButton.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
+      taskElement.textContent = newState.length + " task";
+
+      localStorage.setItem("TODO", JSON.stringify(state));
     });
 
     return todoNode;
@@ -95,13 +114,16 @@
     addTodoForm.addEventListener("submit", function(event) {
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
-      let todoContext = document.getElementsByName("description")[0].value;
-      console.log(todoContext);
+
+      let todoContext = inputField.value;
       // validation for user -- can not enter spcial char
       if (todoContext != "") {
         let newItem = todoFunctions.addTodo(state, todoContext);
-        document.getElementsByName("description")[0].value = "";
+        inputField.value = "";
         update(newItem);
+        taskElement.textContent = newItem.length + " task";
+
+        localStorage.setItem("TODO", JSON.stringify(state));
       }
 
       // what does event.preventDefault do?
@@ -113,16 +135,33 @@
       // update(newState);
     });
   }
+  // get items form localStorage:-
+  let storeData = localStorage.getItem("TODO");
+  // check if data isn't empty
+  if (storeData) {
+    state = JSON.parse(storeData);
+    let maxNumber = state.reduce(
+      (max, current) => (max = max.id < current.id ? max.id : current.id),
+      0
+    );
+    while (maxNumber > 0) {
+      todoFunctions.generateId();
+      maxNumber--;
+    }
 
+    // loadList(listArray); // load the list to the user interface
+  }
   // you should not need to change this function
   var update = function(newState) {
     state = newState;
     renderState(state);
   };
+  // set items to localstorge:- "this code must be added where the listArray is updated"
+  localStorage.setItem("TODO", JSON.stringify(state));
 
   // you do not need to change this function
-  var renderState = function(state) {
-    var todoListNode = document.createElement("ul");
+  const renderState = function(state) {
+    let todoListNode = document.createElement("ul");
 
     state.forEach(function(todo) {
       todoListNode.appendChild(createTodoNode(todo));
