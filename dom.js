@@ -29,10 +29,17 @@ numTasks.setAttribute('class','numTasks');
 headerPart.appendChild(datePart);
 headerPart.appendChild(numTasks);
 thebody.insertBefore(headerPart,container);
-//////////////////////////////
 
-  //////////// add sort function  ///////////
-  //////////// add sort function  ///////////
+// add sort button
+  var sortTasksButton = document.createElement('button');
+  sortTasksButton.classList.add = 'sort-button';
+  sortTasksButton.textContent = "Sort Tasks"
+  headerPart.appendChild(sortTasksButton);
+  sortTasksButton.addEventListener('click', function(event) {
+    let sortState = todoFunctions.sortTodos(state);
+    update(sortState);
+  })
+
 
   // This function takes a todo, it returns the DOM node representing that todo
   var createTodoNode = function(todo) {
