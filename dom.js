@@ -115,7 +115,7 @@ thebody.insertBefore(headerPart,container);
       todoFunctions.generateId()
       maxNumber--
     }
-    console.log(todoFunctions.generateId())
+    
     // loadList(listArray); // load the list to the user interface
   }
   // you should not need to change this function

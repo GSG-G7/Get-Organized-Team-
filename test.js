@@ -27,7 +27,7 @@ test("Test addTodo function", function(todo) {
 test("Test addTodo function", function(todo) {
   let actual = logic.addTodo(sample, 1)[0].done;
   let expected = false;
-  todo.deepEqual(actual, expected, "add numbers in the description value");
+  todo.deepEqual(actual, expected, "should return false");
   todo.end();
 });
 
