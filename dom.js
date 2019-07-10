@@ -32,6 +32,8 @@ thebody.insertBefore(headerPart,container);
 //////////////////////////////
 
   //////////// add sort function  ///////////
+  //////////// add sort function  ///////////
+
   // This function takes a todo, it returns the DOM node representing that todo
   var createTodoNode = function(todo) {
     var todoNode = document.createElement("li");
@@ -45,6 +47,9 @@ thebody.insertBefore(headerPart,container);
 
     // this adds the delete button
     var deleteButtonNode = document.createElement("button");
+    var symbol = document.createElement("i");
+    symbol.className = "far fa-trash-alt";
+    deleteButtonNode.appendChild(symbol);
     deleteButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.deleteTodo(state, todo.id);
       update(newState);
@@ -54,6 +59,15 @@ thebody.insertBefore(headerPart,container);
     // add markTodo button
 
     // add classes for css
+    var markedTodoButton = document.createElement("button");
+    var symbol = document.createElement("i");
+    symbol.className = "far fa-check-circle";
+    markedTodoButton.appendChild(symbol);
+    markedTodoButton.addEventListener("click", function(event) {
+      var newState = todoFunctions.markTodo(state, todo.id);
+      update(newState);
+    });
+    todoNode.appendChild(markedTodoButton);
 
     return todoNode;
   };
