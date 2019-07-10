@@ -5,12 +5,12 @@
   // This is the dom node where we will keep our todo
   var container = document.getElementById("todo-container");
   var addTodoForm = document.getElementById("add-todo");
-
   var state = [
     { id: -3, description: "first todo" },
     { id: -2, description: "second todo" },
     { id: -1, description: "third todo" }
   ]; // this is our initial todoList
+  var len=state.length;
 
 //////////////////////////header and date section/////////////////////////////
 let thebody=document.getElementsByTagName('body')[0];
@@ -23,12 +23,15 @@ datePart.innerHTML=today.toLocaleDateString('en',option);
 
 datePart.setAttribute('class','date');
 let numTasks=document.createElement('span');
-numTasks.textContent=state.length+" task";
+numTasks.textContent=len+" task";
 numTasks.setAttribute('class','numTasks');
-
 headerPart.appendChild(datePart);
 headerPart.appendChild(numTasks);
 thebody.insertBefore(headerPart,container);
+
+var taskElement=document.getElementsByClassName('numTasks')[0];
+
+
 
 // add sort button
   var sortTasksButton = document.createElement('button');
@@ -38,6 +41,7 @@ thebody.insertBefore(headerPart,container);
   sortTasksButton.addEventListener('click', function(event) {
     let sortState = todoFunctions.sortTodos(state);
     update(sortState);
+    taskElement.textContent=sortState.length;
   })
 
 
@@ -60,6 +64,7 @@ thebody.insertBefore(headerPart,container);
     deleteButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.deleteTodo(state, todo.id);
       update(newState);
+      taskElement.textContent=newState.length;
     });
     todoNode.appendChild(deleteButtonNode);
 
@@ -73,6 +78,7 @@ thebody.insertBefore(headerPart,container);
     markedTodoButton.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
+      taskElement.textContent=newState.length;
     });
     todoNode.appendChild(markedTodoButton);
 
@@ -85,10 +91,12 @@ thebody.insertBefore(headerPart,container);
       event.preventDefault();
       let todoContext = document.getElementsByName("description")[0].value;
       // validation for user -- can not enter spcial char
-      if(todoContext != ""){
-        let newItem = todoFunctions.addTodo(state, todoContext);
+      if(todoContext !== ""){
+      let newItem = todoFunctions.addTodo(state, todoContext);
+      taskElement.textContent=newItem.length;
       document.getElementsByName("description")[0].value = "";
       update(newItem);
+     
       }
       
       // what does event.preventDefault do?
