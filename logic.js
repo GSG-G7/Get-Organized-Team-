@@ -23,13 +23,15 @@ var todoFunctions = {
     });
   },
 
+  //addTodo Function
+
   addTodo: function(todos, newTodo) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
     // returns a new array, it should contain todos with the newTodo added to the end.
     // add an id to the newTodo. You can use the generateId function to create an id.
     // hint: array.concat
     let newArray = todoFunctions.cloneArrayOfObjects(todos);
-    if (newTodo === "" || !isNaN(newTodo)) return false;
+    if (newTodo === "" || !isNaN(newTodo)) return false; // if newTodo is empty or a number
     let item = {
       id: todoFunctions.generateId(),
       description: newTodo,
@@ -38,18 +40,22 @@ var todoFunctions = {
     newArray.push(item);
     return newArray;
   },
+
+  //deleteTodo Function
+
   deleteTodo: function(todos, idToDelete) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
     let newArray = todoFunctions.cloneArrayOfObjects(todos);
     // return a new array, this should not contain any todo with an id of idToDelete
     newArray.filter((element, index, array) => {
-      if (element.id === idToDelete) {
-        array.splice(index, 1);
-      }
+      if (element.id === idToDelete) array.splice(index, 1);
     });
     // hint: array.filter
     return newArray;
   },
+
+  //markTodo Function
+
   markTodo: function(todos, idToMark) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
     let newArray = todoFunctions.cloneArrayOfObjects(todos);
@@ -68,20 +74,22 @@ var todoFunctions = {
     return newArray;
     // hint: array.map
   },
+
+  //sortTodos Function
+
   sortTodos: function(todos, sortFunction) {
-    // stretch goal! Do this last
-    // should leave the input arguement todos unchanged (you can use cloneArrayOfObjects)
-    // sortFunction will have same signature as the sort function in array.sort
-    // hint: array.slice, array.sort
+  
    let newArr = todoFunctions.cloneArrayOfObjects(todos);
-   let doneState = newArr.filter(element => element.done);
-   let notDone = newArr.filter(element=> !element.done);
+   let doneTasks = newArr.filter(element => element.done); // done: true
+   let unDoneTasks = newArr.filter(element=> !element.done); //done: false
+
    function sortItems(a,b) {
      return a.description > b.description ? 1 : -1;
-   }
-   notDone.sort(sortItems); 
-   doneState.sort(sortItems);
-   return notDone.concat(doneState);
+    }
+   
+   unDoneTasks.sort(sortItems); 
+   doneTasks.sort(sortItems);
+   return unDoneTasks.concat(doneTasks);
   }
 };
 
