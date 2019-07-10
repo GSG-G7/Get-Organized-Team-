@@ -5,6 +5,7 @@
   // This is the dom node where we will keep our todo
   var container = document.getElementById("todo-container");
   var addTodoForm = document.getElementById("add-todo");
+  let inputField = document.getElementsByName("description")[0];
 
   var state = [
     { id: -3, description: "first todo" },
@@ -38,6 +39,7 @@ thebody.insertBefore(headerPart,container);
   sortTasksButton.addEventListener('click', function(event) {
     let sortState = todoFunctions.sortTodos(state);
     update(sortState);
+    localStorage.setItem('TODO', JSON.stringify(state))
   })
 
 
@@ -60,6 +62,7 @@ thebody.insertBefore(headerPart,container);
     deleteButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.deleteTodo(state, todo.id);
       update(newState);
+      localStorage.setItem('TODO', JSON.stringify(state))
     });
     todoNode.appendChild(deleteButtonNode);
 
@@ -73,6 +76,7 @@ thebody.insertBefore(headerPart,container);
     markedTodoButton.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
+      localStorage.setItem('TODO', JSON.stringify(state))
     });
     todoNode.appendChild(markedTodoButton);
 
@@ -83,12 +87,13 @@ thebody.insertBefore(headerPart,container);
     addTodoForm.addEventListener("submit", function(event) {
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
-      let todoContext = document.getElementsByName("description")[0].value;
+      let todoContext = inputField.value;
       // validation for user -- can not enter spcial char
       if(todoContext != ""){
         let newItem = todoFunctions.addTodo(state, todoContext);
-      document.getElementsByName("description")[0].value = "";
+        inputField.value = "";
       update(newItem);
+      localStorage.setItem('TODO', JSON.stringify(state))
       }
       
       // what does event.preventDefault do?
@@ -100,16 +105,30 @@ thebody.insertBefore(headerPart,container);
       // update(newState);
     });
   }
-
+  // get items form localStorage:-
+  let storeData = localStorage.getItem('TODO')
+  // check if data isn't empty
+  if(storeData){
+    state = JSON.parse(storeData);
+    let maxNumber = state.reduce((max,current)=> max = max.id<current.id?max.id:current.id,0)
+    while(maxNumber > 0){
+      todoFunctions.generateId()
+      maxNumber--
+    }
+    console.log(todoFunctions.generateId())
+    // loadList(listArray); // load the list to the user interface
+  }
   // you should not need to change this function
   var update = function(newState) {
     state = newState;
     renderState(state);
   };
+  // set items to localstorge:- "this code must be added where the listArray is updated"  
+  localStorage.setItem('TODO', JSON.stringify(state))
 
   // you do not need to change this function
-  var renderState = function(state) {
-    var todoListNode = document.createElement("ul");
+  const renderState = function(state) {
+    let todoListNode = document.createElement("ul");
 
     state.forEach(function(todo) {
       todoListNode.appendChild(createTodoNode(todo));
