@@ -12,6 +12,26 @@
     { id: -1, description: "third todo" }
   ]; // this is our initial todoList
 
+//////////////////////////header and date section/////////////////////////////
+let thebody=document.getElementsByTagName('body')[0];
+let headerPart=document.createElement('header');
+headerPart.setAttribute('class','header');
+let datePart=document.createElement('span');
+let today =new Date();
+option ={weekday:"long",month:"short",day:"numeric"};
+datePart.innerHTML=today.toLocaleDateString('en',option);
+
+datePart.setAttribute('class','date');
+let numTasks=document.createElement('span');
+numTasks.textContent=state.length+" task";
+numTasks.setAttribute('class','numTasks');
+
+headerPart.appendChild(datePart);
+headerPart.appendChild(numTasks);
+thebody.insertBefore(headerPart,container);
+//////////////////////////////
+
+  //////////// add sort function  ///////////
   //////////// add sort function  ///////////
 
   // This function takes a todo, it returns the DOM node representing that todo
@@ -37,6 +57,8 @@
     todoNode.appendChild(deleteButtonNode);
 
     // add markTodo button
+
+    // add classes for css
     var markedTodoButton = document.createElement("button");
     var symbol = document.createElement("i");
     symbol.className = "far fa-check-circle";
@@ -55,16 +77,16 @@
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
       let todoContext = document.getElementsByName("description")[0].value;
+      // validation for user -- can not enter spcial char
       let newItem = todoFunctions.addTodo(state, todoContext);
       if (newItem === false) alert("Enter a correct content");
       document.getElementsByName("description")[0].value = "";
       update(newItem);
-
+      
       // what does event.preventDefault do?
       // what is inside event.target?
 
       // var description = "?"; // event.target ....
-
       // hint: todoFunctions.addTodo
       // var newState = []; // ?? change this!
       // update(newState);
