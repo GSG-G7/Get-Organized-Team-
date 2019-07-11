@@ -10,11 +10,7 @@
   var addTodoForm = document.getElementById("add-todo");
   let inputField = document.getElementsByName("description")[0];
 
-  var state = [
-    { id: -3, description: "first todo" },
-    { id: -2, description: "second todo" },
-    { id: -1, description: "third todo" }
-  ]; // this is our initial todoList
+  var state = []; // this is our initial todoList
 
   let len = state.length;
   const localstorage = localStorage.getItem("TODO");
@@ -35,7 +31,7 @@
   numTasks.textContent = state.length + " task";
   numTasks.textContent = len + " task";
   numTasks.setAttribute("class", "numTasks");
-  
+
   headerPart.appendChild(datePart);
   headerPart.appendChild(numTasks);
   thebody.insertBefore(headerPart, container);
@@ -50,7 +46,7 @@
   var symbol = document.createElement("i");
   symbol.className = "fas fa-sort";
   sortTasksButton.appendChild(symbol);
-  sortTasksButton.setAttribute('id','sortTasksButton')
+  sortTasksButton.setAttribute("id", "sortTasksButton");
   headerPart.appendChild(sortTasksButton);
   sortTasksButton.addEventListener("click", function(event) {
     let sortState = todoFunctions.sortTodos(state);
@@ -119,7 +115,11 @@
 
       let todoContext = inputField.value;
       // validation for user -- can not enter spcial char
-      if (todoContext != "") {
+      reWhiteSpace = new RegExp(/^\s+$/);
+      if (reWhiteSpace.test(todoContext)) {
+        alert("Input a valid value, please");
+      }
+      if (todoContext != "" && !reWhiteSpace.test(todoContext)) {
         let newItem = todoFunctions.addTodo(state, todoContext);
         inputField.value = "";
         update(newItem);
