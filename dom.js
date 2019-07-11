@@ -50,7 +50,8 @@
   var symbol = document.createElement("i");
   symbol.className = "fas fa-sort";
   sortTasksButton.appendChild(symbol);
-  numTasks.appendChild(sortTasksButton);
+  sortTasksButton.setAttribute('id','sortTasksButton')
+  headerPart.appendChild(sortTasksButton);
   sortTasksButton.addEventListener("click", function(event) {
     let sortState = todoFunctions.sortTodos(state);
     update(sortState);

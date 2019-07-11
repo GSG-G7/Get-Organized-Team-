@@ -61,12 +61,8 @@ var todoFunctions = {
     // in the new todo array, all elements will remain unchanged except the one with id: idToMark
     newArray.map(element => {
       if (element.id === idToMark) {
-        if (!element.done) {
-          element.done = true;
-        } else {
-          element.done = false;
-        }
-      }
+     element.done = !element.done 
+     return element;}
     });
     // this element will have its done value toggled
 
