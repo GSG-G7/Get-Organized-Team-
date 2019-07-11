@@ -35,10 +35,12 @@
   numTasks.textContent = state.length + " task";
   numTasks.textContent = len + " task";
   numTasks.setAttribute("class", "numTasks");
-
+  
   headerPart.appendChild(datePart);
   headerPart.appendChild(numTasks);
   thebody.insertBefore(headerPart, container);
+  const taskElement = document.getElementsByClassName("numTasks")[0];
+  
 
   //////////////////////////////
 
@@ -52,8 +54,6 @@
   sortTasksButton.addEventListener("click", function(event) {
     let sortState = todoFunctions.sortTodos(state);
     update(sortState);
-
-    var taskElement = document.getElementsByClassName("numTasks")[0];
 
     taskElement.textContent = sortState.length + " task";
 
@@ -82,6 +82,7 @@
       var newState = todoFunctions.deleteTodo(state, todo.id);
       update(newState);
       taskElement.textContent = newState.length + " task";
+
       localStorage.setItem("TODO", JSON.stringify(state));
     });
     todoNode.appendChild(deleteButtonNode);
